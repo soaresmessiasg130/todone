@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDrag, useDrop } from "react-dnd";
 import { Container, Label } from "./style";
 
-export default function Card() {
+export default function Card({ data }) {
+  const ref = useRef();
+
+  const [{ isDragging }, dragRef] = useDrag({
+    item: { type: "CARD", id: data.id },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, dropRef] = useDrop({
+    accept: "CARD",
+    hover(item, monitor) {
+      console.log(item.id);
+      console.log(data.id);
+    },
+  });
+
+  dragRef(dropRef(ref));
+
   return (
-    <Container>
+    <Container ref={ref} isDragging={isDragging}>
       <header>
-        <Label color="#f00" />
+        {data.labels.map((label) => (
+          <Label key={label} color={label} />
+        ))}
       </header>
-      <p>Estudar as novidades do Spring Boot</p>
-      <img
-        src="https://api.adorable.io/avatars/285/abott@adorable.png"
-        alt=""
-      />
+      <p>{data.content}</p>
+      <img src={data.user} alt="" />
     </Container>
   );
 }
