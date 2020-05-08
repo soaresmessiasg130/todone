@@ -31,7 +31,8 @@ export function loadList() {
         },
         {
           id: 5,
-          content: "Fazer uma API para pegar informações e popular esses cards",
+          content:
+            "Fazer uma API parasas asassss sssssss   ssssssss ssssssss saaaaa pegar informações e popular esses cards",
           labels: ["#aa0", "#f44", "#44e", "#9f1"],
           user: "https://api.adorable.io/avatars/285/abott@adorable.png",
         },
